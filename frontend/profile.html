@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="profile-page-indicator" style="display:none;"></div>
+
+            <div class="profile-grid">
+                
+                <!-- Left panel: Avatar card details -->
+                <div class="glass-card profile-card-large fade-in" style="height:fit-content;">
+                    <div class="avatar-large" id="profileCardInitials">
+                        AM
+                        <div class="avatar-upload-btn" title="Upload Photo"><i class="fa-solid fa-camera"></i></div>
+                    </div>
+                    <h3 id="profileCardName" style="font-size:1.3rem;">Alex Mercer</h3>
+                    <p class="text-muted" id="profileCardEmail" style="font-size:0.85rem; margin-top:2px;">alex.mercer@cyberpay.ai</p>
+                    
+                    <div class="profile-kyc-status">
+                        <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> KYC Verified</span>
+                    </div>
+
+                    <ul class="info-list">
+                        <li class="info-list-item">
+                            <span class="info-label">Account Tier:</span>
+                            <span class="info-val" style="color:var(--primary); font-weight:600;">Premium Gold</span>
+                        </li>
+                        <li class="info-list-item">
+                            <span class="info-label">KYC Cleared:</span>
+                            <span class="info-val">June 10, 2026</span>
+                        </li>
+                        <li class="info-list-item">
+                            <span class="info-label">Daily Limit:</span>
+                            <span class="info-val">₹5,000.00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right panel: Edit forms and Linked Cards bank settings -->
+                <div style="display:flex; flex-direction:column; gap:24px;">
+                    
+                    <!-- Edit details card form -->
+                    <div class="glass-card fade-in">
+                        <h3 style="font-size:1.15rem; margin-bottom: 20px;">Personal Credentials</h3>
+                        <form id="profileEditForm">
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom: 16px;">
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="profileInputName">Full Name</label>
+                                    <input type="text" id="profileInputName" class="input-control" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="profileInputEmail">Email Address</label>
+                                    <input type="email" id="profileInputEmail" class="input-control" required>
+                                </div>
+                            </div>
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom: 24px;">
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="profileInputPhone">Phone Number</label>
+                                    <input type="text" id="profileInputPhone" class="input-control" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="profileInputUpi">UPI ID Alias</label>
+                                    <input type="text" id="profileInputUpi" class="input-control" readonly style="background:rgba(30,41,59,0.2); cursor:not-allowed;">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="padding:10px 24px;">Save Credentials</button>
+                        </form>
+                    </div>
+
+                    <!-- Linked bank card listings -->
+                    <div class="glass-card fade-in">
+                        <h3 style="font-size:1.15rem; margin-bottom:4px;">Linked Bank Accounts & Cards</h3>
+                        <p class="text-muted" style="font-size:0.8rem;">Linked bank instruments for funding wallet balances</p>
+
+                        <!-- Cards Grid lists -->
+                        <div class="card-manager-grid" id="profileCardGridList">
+                            <!-- Cards will load dynamically -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

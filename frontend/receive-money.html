@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive Money - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="receive-page-indicator" style="display:none;"></div>
+
+            <div class="transfer-container">
+                
+                <!-- QR Code Box -->
+                <div class="glass-card fade-in" style="text-align: center;">
+                    <h2 style="font-size:1.3rem; margin-bottom:4px;">Request Payment</h2>
+                    <p class="text-muted" style="font-size:0.8rem; margin-bottom: 24px;">Share QR code or UPI link to receive funds</p>
+
+                    <!-- QR Display -->
+                    <div class="qr-container">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=prashuyadav360@ybl" id="receiveQrImg" alt="Payment QR Code" class="qr-image">
+                    </div>
+
+                    <div style="margin-bottom:20px; display:flex; flex-direction:column; gap:10px;">
+                        <span style="font-size:0.8rem; color:var(--text-muted); display:block;">Your Smart UPI ID:</span>
+                        <div style="display:flex; gap:8px;">
+                            <input type="text" id="receiveUpiId" class="input-control" value="alexmercer@cyberpay" readonly style="text-align:center; padding:10px; font-weight:600;">
+                            <button class="btn btn-secondary" onclick="copyUpi()" style="padding:10px 14px;"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+                    </div>
+
+                    <div style="border-top:1px solid var(--border-color); padding-top:20px; text-align:left;">
+                        <div class="form-group">
+                            <label for="qrAmountInput">Generate Dynamic Amount QR</label>
+                            <input type="number" id="qrAmountInput" class="input-control" placeholder="Enter amount (e.g. 50.00)">
+                        </div>
+                        <button class="btn btn-primary" id="genQrBtn" style="width: 100%;">Create QR Code</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        function copyUpi() {
+            const upiId = document.getElementById('receiveUpiId');
+            if (upiId) {
+                upiId.select();
+                upiId.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(upiId.value);
+                showToast('UPI ID copied to clipboard.');
+            }
+        }
+    </script>
+</body>
+</html>

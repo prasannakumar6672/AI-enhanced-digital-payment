@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Spending Insights - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="insights-page-indicator" style="display:none;"></div>
+
+            <div class="insights-grid">
+                
+                <!-- Left Column: Category spend charts and insight recommendations -->
+                <div style="display:flex; flex-direction:column; gap:24px;">
+                    
+                    <!-- Spending Categories Comparison Bar Chart -->
+                    <div class="glass-card">
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="font-size:1.1rem; margin-bottom:4px;">Monthly Category Expenditure</h3>
+                            <p class="text-muted" style="font-size:0.8rem;">Current billing cycle comparison values</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="insightsCategoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- AI Spending Recommendations Panel -->
+                    <div class="glass-card recommendations-panel">
+                        <h3 style="font-size:1.1rem; margin-bottom:4px;">AI Financial Recommendations</h3>
+                        <p class="text-muted" style="font-size:0.8rem; margin-bottom:16px;">Actionable recommendations computed by spend intelligence models</p>
+
+                        <!-- Insight item 1 (Warning alert) -->
+                        <div class="glass-card insight-card warning" style="border-radius:12px; margin:0;">
+                            <div class="insight-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <div class="insight-info">
+                                <h4>Subscription Drift Detected</h4>
+                                <p>We noticed entertainment streaming services bills increased by 15.4% compared to last quarter. You might want to review unused active licenses.</p>
+                            </div>
+                        </div>
+
+                        <!-- Insight item 2 (Success tip) -->
+                        <div class="glass-card insight-card success" style="border-radius:12px; margin:0;">
+                            <div class="insight-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="insight-info">
+                                <h4>Utilities Optimization Achieved</h4>
+                                <p>Nice work! Your electricity invoice dues dropped by 12% this month due to early payments and lower baseline consumption.</p>
+                            </div>
+                        </div>
+
+                        <!-- Insight item 3 (Info alert) -->
+                        <div class="glass-card insight-card" style="border-radius:12px; margin:0;">
+                            <div class="insight-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                            <div class="insight-info">
+                                <h4>Savings Accelerator Opportunity</h4>
+                                <p>Transferring ₹200.00 to your linked high-yield vault will put you 3 weeks ahead of your ₹10,000.00 savings goal.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Budgets status tracking slider widgets -->
+                <div class="glass-card fade-in" style="height:fit-content;">
+                    <h3 style="font-size:1.1rem; margin-bottom:4px;">Cycle Budget Limits</h3>
+                    <p class="text-muted" style="font-size:0.8rem; margin-bottom: 24px;">Monthly spending cap bounds (₹2,500 total)</p>
+
+                    <!-- Limit item 1 -->
+                    <div class="budget-limit-item">
+                        <div class="budget-limit-header">
+                            <span style="font-weight:500;">Shopping Limit</span>
+                            <span class="text-danger" style="font-weight:600;">₹450 / ₹500</span>
+                        </div>
+                        <div class="budget-progress-bar">
+                            <div class="budget-progress-fill" style="width:0; background:var(--danger);" data-percent="90"></div>
+                        </div>
+                        <span class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">90% limit reached. Recommended warning activated.</span>
+                    </div>
+
+                    <!-- Limit item 2 -->
+                    <div class="budget-limit-item">
+                        <div class="budget-limit-header">
+                            <span style="font-weight:500;">Food & Dining</span>
+                            <span style="font-weight:600; color:var(--warning);">₹180 / ₹300</span>
+                        </div>
+                        <div class="budget-progress-bar">
+                            <div class="budget-progress-fill" style="width:0; background:var(--warning);" data-percent="60"></div>
+                        </div>
+                        <span class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">60% limit reached. Safe margins.</span>
+                    </div>
+
+                    <!-- Limit item 3 -->
+                    <div class="budget-limit-item">
+                        <div class="budget-limit-header">
+                            <span style="font-weight:500;">Bills & Rent</span>
+                            <span style="font-weight:600; color:var(--success);">₹680 / ₹1200</span>
+                        </div>
+                        <div class="budget-progress-bar">
+                            <div class="budget-progress-fill" style="width:0; background:var(--success);" data-percent="56"></div>
+                        </div>
+                        <span class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">56% limit reached. Normal cycle dues.</span>
+                    </div>
+
+                    <!-- Limit item 4 -->
+                    <div class="budget-limit-item">
+                        <div class="budget-limit-header">
+                            <span style="font-weight:500;">Entertainment</span>
+                            <span style="font-weight:600; color:var(--success);">₹240 / ₹500</span>
+                        </div>
+                        <div class="budget-progress-bar">
+                            <div class="budget-progress-fill" style="width:0; background:var(--primary);" data-percent="48"></div>
+                        </div>
+                        <span class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">48% limit reached. Safe margins.</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

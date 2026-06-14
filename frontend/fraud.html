@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fraud Shield - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="fraud-page-indicator" style="display:none;"></div>
+
+            <div class="fraud-grid">
+                
+                <!-- Left panel: risk scores and rules toggles -->
+                <div style="display:flex; flex-direction:column; gap:24px;">
+                    
+                    <!-- Risk Score Gauge -->
+                    <div class="glass-card risk-meter-container">
+                        <h3 style="font-size:1.1rem; margin-bottom: 20px;">AI Safety Rating</h3>
+                        
+                        <div class="risk-gauge-wrapper">
+                            <canvas id="riskGaugeChart"></canvas>
+                            <div class="risk-value-text">
+                                <div class="risk-value-number" id="riskScoreNum">98</div>
+                                <div class="risk-value-label" id="riskScoreLabel">Excellent</div>
+                            </div>
+                        </div>
+
+                        <p class="text-muted" style="font-size:0.8rem; line-height:1.4;">Rating is dynamically computed based on active protection shields and account authentication checks.</p>
+                    </div>
+
+                    <!-- Shields Rules Toggles -->
+                    <div class="glass-card">
+                        <h3 style="font-size:1.1rem; margin-bottom:16px;">AI Shield Regulations</h3>
+                        
+                        <div class="switch-group">
+                            <div class="switch-details">
+                                <span class="switch-title">AI Neural Shield</span>
+                                <span class="switch-desc">Verify geo-coordinates and device fingerprinting.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="aiShieldToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="switch-group">
+                            <div class="switch-details">
+                                <span class="switch-title">Geographic Lock</span>
+                                <span class="switch-desc">Block payments outside normal login locations.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="geoLockToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="switch-group">
+                            <div class="switch-details">
+                                <span class="switch-title">Biometric 2FA Gate</span>
+                                <span class="switch-desc">Force face/touch verification for major transfers.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="biometricsToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="margin-top:20px; border-top:1px solid var(--border-color); padding-top:20px;">
+                            <label for="txnLimitInput">Single Transaction Limit ($)</label>
+                            <input type="number" id="txnLimitInput" class="input-control" value="1000.00" step="100.00" style="padding:10px 14px;">
+                            <span class="text-muted" style="font-size:0.75rem; margin-top:4px;">Transactions exceeding this limit will trigger immediate lockups.</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right panel: security alerts audit logs -->
+                <div class="glass-card fade-in" style="display:flex; flex-direction:column;">
+                    <div style="margin-bottom: 24px;">
+                        <h2 style="font-size:1.3rem; margin-bottom:4px;">Security Audit Logs</h2>
+                        <p class="text-muted" style="font-size:0.8rem;">Historical records of transaction risk classification scans</p>
+                    </div>
+
+                    <!-- Category Tab Filters -->
+                    <div class="log-tabs">
+                        <button class="log-tab-btn active">All</button>
+                        <button class="log-tab-btn">Safe</button>
+                        <button class="log-tab-btn">Suspicious</button>
+                        <button class="log-tab-btn">High-risk</button>
+                    </div>
+
+                    <!-- Table List -->
+                    <div class="table-container" style="flex:1;">
+                        <table class="txn-table">
+                            <thead>
+                                <tr>
+                                    <th>Target / Source</th>
+                                    <th>Clearance Time</th>
+                                    <th>Security Level</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fraudTxnLogsTableBody">
+                                <!-- Dynamic logs -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

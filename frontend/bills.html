@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bills & Utilities - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="bills-page-indicator" style="display:none;"></div>
+
+            <div class="glass-card fade-in" style="margin-bottom: 24px;">
+                <div style="margin-bottom: 24px;">
+                    <h2 style="font-size:1.5rem; margin-bottom:4px;">Bills & Utilities Hub</h2>
+                    <p class="text-muted" style="font-size:0.875rem;">Instant invoice clearings and scheduled automatic clearances</p>
+                </div>
+
+                <!-- Dues alert banner -->
+                <div id="pendingDuesContainer" style="margin-bottom:30px;"></div>
+
+                <h3 style="font-size:1.05rem; margin-bottom:16px;">Utility Services Catalog</h3>
+                <div class="bills-grid">
+                    <div class="bill-category-card" data-bill="Mobile Recharge" data-cost="29.99">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <span>Mobile Prepaid</span>
+                    </div>
+                    <div class="bill-category-card" data-bill="Electricity" data-cost="85.20">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Electricity</span>
+                    </div>
+                    <div class="bill-category-card" data-bill="Water" data-cost="32.50">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span>Water</span>
+                    </div>
+                    <div class="bill-category-card" data-bill="DTH" data-cost="15.00">
+                        <i class="fa-solid fa-tv"></i>
+                        <span>DTH / Cable</span>
+                    </div>
+                    <div class="bill-category-card" data-bill="Internet" data-cost="49.99">
+                        <i class="fa-solid fa-wifi"></i>
+                        <span>Broadband</span>
+                    </div>
+                    <div class="bill-category-card" data-bill="Gas" data-cost="22.10">
+                        <i class="fa-solid fa-fire-burner"></i>
+                        <span>LPG / Gas</span>
+                    </div>
+                </div>
+
+                <div style="border-top:1px solid var(--border-color); padding-top:24px;">
+                    <h3 style="font-size:1.05rem; margin-bottom:16px;">Autopay Settings</h3>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div class="switch-group">
+                            <div class="switch-details">
+                                <span class="switch-title">Electricity Bill Autopay</span>
+                                <span class="switch-desc">Automatically clear ConEd utility invoices when received.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked id="autoElectric">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="switch-group">
+                            <div class="switch-details">
+                                <span class="switch-title">Mobile Plan Auto-Renewal</span>
+                                <span class="switch-desc">Recharge prepaid balance immediately on plan expiration.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="autoMobile">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        async function payPendingBill(billId, billType, amount) {
+            const amountNum = parseFloat(amount);
+            openPinModal(async () => {
+                try {
+                    const res = await db.fetch('/bills/pay', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            billId,
+                            billType,
+                            amount: amountNum
+                        })
+                    });
+
+                    if (res.success) {
+                        showToast(`${billType} dues of ₹${amountNum.toFixed(2)} successfully cleared!`, 'success');
+                        setTimeout(() => window.location.reload(), 1200);
+                    }
+                } catch (payErr) {
+                    showToast(payErr.message, 'danger');
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const autoEl = document.getElementById('autoElectric');
+            const autoMob = document.getElementById('autoMobile');
+            
+            if (autoEl) autoEl.addEventListener('change', () => {
+                showToast(autoEl.checked ? 'Electricity Autopay enabled.' : 'Electricity Autopay disabled.');
+            });
+            
+            if (autoMob) autoMob.addEventListener('change', () => {
+                showToast(autoMob.checked ? 'Mobile Autopay enabled.' : 'Mobile Autopay disabled.');
+            });
+        });
+    </script>
+</body>
+</html>

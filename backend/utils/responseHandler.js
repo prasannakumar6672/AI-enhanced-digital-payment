@@ -1,0 +1,28 @@
+/* 
+ * Standard API Response Format Helper
+ * Wraps success and error messages into structured JSON standards
+ */
+
+const sendSuccess = (res, message, data = {}, statusCode = 200) => {
+    return res.status(statusCode).json({
+        success: true,
+        message,
+        data
+    });
+};
+
+const sendError = (res, message, statusCode = 500, errors = null) => {
+    const response = {
+        success: false,
+        message
+    };
+    if (errors) {
+        response.errors = errors;
+    }
+    return res.status(statusCode).json(response);
+};
+
+module.exports = {
+    sendSuccess,
+    sendError
+};

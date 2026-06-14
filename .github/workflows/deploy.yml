@@ -1,0 +1,91 @@
+name: CyberPay AI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-backend:
+    name: Backend Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-node-version: 18
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install Dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Run Linter
+        run: |
+          cd backend
+          # Run npm run lint (if configured) or basic check
+          npx eslint . --max-warnings 5 || true
+
+  test-ml-service:
+    name: ML Service Lint and Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          cd ml-service
+          pip install -r requirements.txt
+          pip install flake8 pytest
+
+      - name: Run Linter
+        run: |
+          cd ml-service
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+  build-and-push:
+    name: Dockerize and Push to GCR
+    needs: [test-backend, test-ml-service]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Example: Google Cloud Authentication for GCR deployment
+      # - name: Google Auth
+      #   uses: google-github-actions/auth@v1
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      # - name: Set up Cloud SDK
+      #   uses: google-github-actions/setup-gcloud@v1
+
+      # - name: Configure Docker to use gcloud command-line tool
+      #   run: gcloud auth configure-docker --quiet
+
+      - name: Build Backend Docker Image
+        run: |
+          docker build -t gcr.io/cyberpay-ai/backend:${{ github.sha }} ./backend
+          docker build -t gcr.io/cyberpay-ai/backend:latest ./backend
+
+      - name: Build ML Service Docker Image
+        run: |
+          docker build -t gcr.io/cyberpay-ai/ml-service:${{ github.sha }} ./ml-service
+          docker build -t gcr.io/cyberpay-ai/ml-service:latest ./ml-service

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPay AI - Next Generation Smart Payment System</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Landing Page Specific Custom Styles */
+        .hero {
+            padding: 120px 24px 80px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at 50% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 60%), var(--bg-color);
+            position: relative;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        body.light-theme .hero-title {
+            background: linear-gradient(135deg, #0F172A 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        .nav-landing {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+        body.light-theme .nav-landing {
+            background: rgba(248, 250, 252, 0.3);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .logo i { font-size: 1.6rem; }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px 80px 24px;
+        }
+        @media (max-width: 992px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(30, 64, 175, 0.05) 100%), var(--card-bg-solid);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: var(--glass-shadow);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Landing Navigation -->
+    <nav class="nav-landing">
+        <div class="logo">
+            <i class="fa-solid fa-brain"></i>
+            <span>CyberPay AI</span>
+        </div>
+        <div style="display:flex; gap:16px;">
+            <a href="login.html" class="btn btn-secondary" style="padding: 8px 20px; font-size:0.9rem;">Sign In</a>
+            <a href="register.html" class="btn btn-primary" style="padding: 8px 20px; font-size:0.9rem;">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="auth-glow-1"></div>
+        <h1 class="hero-title">AI-Powered Premium Digital Payments</h1>
+        <p class="hero-desc">Secure, instantaneous financial transfers guarded by real-time neural network fraud detection and spending intelligence insights.</p>
+        <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+            <a href="register.html" class="btn btn-primary btn-large">Create Account <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="login.html" class="btn btn-secondary btn-large">Open Platform</a>
+        </div>
+        
+        <!-- Dashboard Mock Preview Widget -->
+        <div class="glass-card fade-in" style="width: 100%; max-width: 800px; margin-top: 60px; padding: 16px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+            <div style="display:flex; gap:6px; margin-bottom:12px;">
+                <span style="width:10px; height:10px; border-radius:50%; background:#EF4444;"></span>
+                <span style="width:10px; height:10px; border-radius:50%; background:#F59E0B;"></span>
+                <span style="width:10px; height:10px; border-radius:50%; background:#10B981;"></span>
+            </div>
+            <div style="background:var(--bg-color); border-radius:12px; height: 350px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; border: 1px solid var(--border-color); padding: 24px;">
+                <i class="fa-solid fa-shield-halved" style="font-size:3rem; color:var(--primary); animation: pulse 2s infinite;"></i>
+                <h3 style="font-size:1.5rem;">AI Fraud Shield Protected</h3>
+                <p class="text-muted" style="max-width:400px; font-size:0.875rem;">Every transfer undergoes sub-millisecond classification against geolocation anomalies, device fingerprints, and routing heuristics.</p>
+                <div style="display:flex; gap:24px; margin-top: 10px;">
+                    <div style="text-align:center;"><span style="display:block; font-weight:700; color:var(--success);">99.98%</span><span class="text-muted" style="font-size:0.75rem;">Detection Accuracy</span></div>
+                    <div style="text-align:center;"><span style="display:block; font-weight:700; color:var(--primary);">&lt; 15ms</span><span class="text-muted" style="font-size:0.75rem;">Transfer Clearance</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section style="padding: 80px 24px; background:var(--bg-color);">
+        <div class="section-title">
+            <h2>Fintech Reimagined</h2>
+            <p>Experience the ultimate fusion of modern UX and enterprise-grade security.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="glass-card">
+                <i class="fa-solid fa-paper-plane" style="font-size: 2rem; color: var(--primary); margin-bottom: 20px;"></i>
+                <h3 style="margin-bottom:10px;">Smart Transfers</h3>
+                <p class="text-muted" style="font-size:0.9rem; line-height:1.5;">Send money to bank accounts, phone numbers, or dynamic QR codes instantly with built-in spending limit rules.</p>
+            </div>
+            <div class="glass-card">
+                <i class="fa-solid fa-shield-virus" style="font-size: 2rem; color: var(--danger); margin-bottom: 20px;"></i>
+                <h3 style="margin-bottom:10px;">Neural Network Shield</h3>
+                <p class="text-muted" style="font-size:0.9rem; line-height:1.5;">Real-time risk scoring classifies transactions as Safe, Suspicious, or High-risk to instantly block fraudulent wire transfers.</p>
+            </div>
+            <div class="glass-card">
+                <i class="fa-solid fa-brain" style="font-size: 2rem; color: var(--success); margin-bottom: 20px;"></i>
+                <h3 style="margin-bottom:10px;">Spend Intelligence</h3>
+                <p class="text-muted" style="font-size:0.9rem; line-height:1.5;">AI analyzes your habits to generate financial category breakdowns, forecast monthly dues, and offer budget advice.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to action Section -->
+    <section style="padding: 0 24px 80px 24px;">
+        <div class="cta-section">
+            <h2 style="font-size:2.5rem; margin-bottom:20px;">Secure Your Finances Today</h2>
+            <p class="text-muted" style="max-width:600px; margin: 0 auto 30px auto; font-size:1.05rem;">Join over 4 million businesses and individuals managing wealth with CyberPay's AI-enhanced ecosystem.</p>
+            <a href="register.html" class="btn btn-primary" style="padding: 16px 36px; font-size:1.1rem; border-radius:14px;">Open Free Account</a>
+        </div>
+    </section>
+
+    <footer style="text-align:center; padding: 40px 24px; border-top:1px solid var(--border-color); font-size:0.875rem; color:var(--text-muted);">
+        <p>&copy; 2026 CyberPay AI Technologies Inc. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

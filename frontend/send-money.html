@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Money - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="send-page-indicator" style="display:none;"></div>
+
+            <div class="transfer-container">
+                <div class="glass-card fade-in">
+                    <div style="margin-bottom: 24px;">
+                        <h2 style="font-size:1.5rem; margin-bottom:4px;">Send Money Instantly</h2>
+                        <p class="text-muted" style="font-size:0.875rem;">Neural Network verified secure transfers</p>
+                    </div>
+
+                    <!-- Quick Contacts Selector -->
+                    <div style="margin-bottom:24px;">
+                        <label class="text-muted" style="font-size:0.85rem; display:block; margin-bottom:10px;">Quick Contacts</label>
+                        <div class="contacts-grid">
+                            <div class="contact-item" data-email="sarah.jenkins@cyberpay.ai">
+                                <div class="contact-avatar">SJ</div>
+                                <span style="font-size:0.8rem; font-weight:500;">Sarah</span>
+                            </div>
+                            <div class="contact-item" data-email="john.doe@cyberpay.ai">
+                                <div class="contact-avatar">JD</div>
+                                <span style="font-size:0.8rem; font-weight:500;">John</span>
+                            </div>
+                            <div class="contact-item" data-email="mia.wang@cyberpay.ai">
+                                <div class="contact-avatar">MW</div>
+                                <span style="font-size:0.8rem; font-weight:500;">Mia</span>
+                            </div>
+                            <div class="contact-item" data-email="david.miller@cyberpay.ai">
+                                <div class="contact-avatar">DM</div>
+                                <span style="font-size:0.8rem; font-weight:500;">David</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transfer Form -->
+                    <form id="sendMoneyForm">
+                        <div class="form-group" style="position:relative;">
+                            <label for="recipientField">Recipient (Phone, Email or UPI ID)</label>
+                            <input type="text" id="recipientField" class="input-control" placeholder="Search contact or enter manually" autocomplete="off" required>
+                            <div id="recipientSuggestions" class="dropdown-menu" style="width: 100%; position: absolute; top: 100%; left: 0; z-index: 1000; display: none; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"></div>
+                        </div>
+
+                        <div class="amount-input-group">
+                            <span class="amount-symbol">₹</span>
+                            <input type="number" id="amountField" class="amount-field" placeholder="0.00" step="0.01" required>
+                            <div style="margin-top:8px; font-size:0.85rem; color:var(--text-muted);">
+                                Enter transaction amount
+                            </div>
+                        </div>
+
+                        <!-- Dynamic AI Security Clearance Status -->
+                        <div id="riskCheckStatus" style="display:none; margin-bottom: 24px;">
+                            <!-- Injected during scanner run -->
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding:14px; font-size:1rem;">
+                            Initialize Transaction <i class="fa-solid fa-shield-halved"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Set contact selector logic to populate fields
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactItems = document.querySelectorAll('.contact-item');
+            const recipientField = document.getElementById('recipientField');
+            
+            contactItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const email = item.getAttribute('data-email');
+                    if (recipientField) recipientField.value = email;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

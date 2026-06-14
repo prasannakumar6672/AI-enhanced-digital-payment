@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-glow-1"></div>
+    <div class="auth-glow-2"></div>
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <div class="auth-logo">
+                <i class="fa-solid fa-brain"></i>
+                <span>CyberPay AI</span>
+            </div>
+            <h2>Create Smart Wallet</h2>
+            <p>Setup secure payments in under 3 minutes</p>
+        </div>
+
+        <div class="glass-card auth-card fade-in">
+            <!-- Stepper header -->
+            <div class="register-stepper">
+                <div class="step-dot active" id="dotStep1">1</div>
+                <div class="step-dot" id="dotStep2">2</div>
+                <div class="step-dot" id="dotStep3">3</div>
+            </div>
+
+            <form id="registerForm">
+                <!-- STEP 1: Basic Info -->
+                <div class="register-step-panel active" id="panelStep1">
+                    <h3 style="margin-bottom: 16px; font-size:1.1rem;">Personal Details</h3>
+                    <div class="form-group">
+                        <label for="regName">Full Name</label>
+                        <input type="text" id="regName" class="input-control" placeholder="Alex Mercer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Email Address</label>
+                        <input type="email" id="regEmail" class="input-control" placeholder="alex.mercer@cyberpay.ai" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPhone">Phone Number</label>
+                        <input type="text" id="regPhone" class="input-control" placeholder="+1 (555) 019-2834" required>
+                    </div>
+                    <button type="button" class="btn btn-primary auth-btn" id="nextToStep2" style="margin-top: 10px;">Continue <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+
+                <!-- STEP 2: Password and PIN -->
+                <div class="register-step-panel" id="panelStep2">
+                    <h3 style="margin-bottom: 16px; font-size:1.1rem;">Security Configuration</h3>
+                    <div class="form-group">
+                        <label for="regPass">Create Passphrase</label>
+                        <input type="password" id="regPass" class="input-control" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPin">4-Digit Secure PIN</label>
+                        <input type="password" id="regPin" class="input-control" maxlength="4" placeholder="••••" required>
+                        <span class="text-muted" style="font-size:0.75rem;">This PIN will be requested during payment clearances.</span>
+                    </div>
+                    <div style="display:flex; gap:12px;">
+                        <button type="button" class="btn btn-secondary" id="backToStep1" style="flex:1;">Back</button>
+                        <button type="button" class="btn btn-primary" id="nextToStep3" style="flex:2;">Continue <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: KYC Upload -->
+                <div class="register-step-panel" id="panelStep3">
+                    <h3 style="margin-bottom: 8px; font-size:1.1rem;">Verify Identity</h3>
+                    <p class="text-muted" style="font-size:0.8rem; margin-bottom: 20px;">Upload a copy of Government issued ID (Passport/Driving License) to clear AI limits constraints.</p>
+                    
+                    <div class="kyc-upload-container" id="kycUploadArea">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Drag ID Document here or click to browse</p>
+                        <span>Supports PDF, PNG, JPG up to 10MB</span>
+                    </div>
+
+                    <div class="kyc-preview-list" id="kycFileList">
+                        <!-- Simulated uploads item -->
+                    </div>
+
+                    <div style="display:flex; gap:12px; margin-top:24px;">
+                        <button type="button" class="btn btn-secondary" id="backToStep2" style="flex:1;">Back</button>
+                        <button type="submit" class="btn btn-primary" id="finishReg" style="flex:2;">Complete KYC <i class="fa-solid fa-circle-check"></i></button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="auth-footer" style="margin-top: 20px;">
+                <p>Already have an account? <a href="login.html">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stepDots = {
+                1: document.getElementById('dotStep1'),
+                2: document.getElementById('dotStep2'),
+                3: document.getElementById('dotStep3')
+            };
+
+            const stepPanels = {
+                1: document.getElementById('panelStep1'),
+                2: document.getElementById('panelStep2'),
+                3: document.getElementById('panelStep3')
+            };
+
+            const goToStep = (step) => {
+                Object.values(stepPanels).forEach(p => p.classList.remove('active'));
+                stepPanels[step].classList.add('active');
+
+                // Update dots
+                Object.keys(stepDots).forEach(num => {
+                    const dot = stepDots[num];
+                    if (num == step) {
+                        dot.className = 'step-dot active';
+                    } else if (num < step) {
+                        dot.className = 'step-dot completed';
+                        dot.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    } else {
+                        dot.className = 'step-dot';
+                        dot.innerText = num;
+                    }
+                });
+            };
+
+            // Validation helper
+            const validateFields = (fields) => {
+                let valid = true;
+                fields.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el || !el.value.trim()) {
+                        valid = false;
+                        if (el) el.style.borderColor = 'var(--danger)';
+                    } else {
+                        if (el) el.style.borderColor = 'var(--border-color)';
+                    }
+                });
+                return valid;
+            };
+
+            // Step 1 to Step 2
+            document.getElementById('nextToStep2').addEventListener('click', () => {
+                if (validateFields(['regName', 'regEmail', 'regPhone'])) {
+                    goToStep(2);
+                } else {
+                    showToast('Please fill out all personal details.', 'warning');
+                }
+            });
+
+            // Step 2 to Step 3
+            document.getElementById('nextToStep3').addEventListener('click', () => {
+                if (validateFields(['regPass', 'regPin'])) {
+                    const pin = document.getElementById('regPin').value;
+                    if (pin.length !== 4 || isNaN(parseInt(pin))) {
+                        showToast('Secure PIN must be exactly 4 digits.', 'warning');
+                        return;
+                    }
+                    goToStep(3);
+                } else {
+                    showToast('Please fill out security configurations.', 'warning');
+                }
+            });
+
+            // Back events
+            document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
+            document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
+
+            // KYC Upload Mimicker
+            const uploader = document.getElementById('kycUploadArea');
+            const fileList = document.getElementById('kycFileList');
+            let isFileUploaded = false;
+
+            uploader.addEventListener('click', () => {
+                if (isFileUploaded) return;
+                
+                // Simulate file chooser
+                setTimeout(() => {
+                    fileList.innerHTML = `
+                        <div class="kyc-preview-item">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <div>
+                                <div style="font-weight:600;">national_id_passport.pdf</div>
+                                <div style="font-size:0.7rem; color:var(--text-muted);">2.4 MB • Uploaded</div>
+                            </div>
+                            <i class="fa-solid fa-trash-can remove-file" id="removeFileBtn"></i>
+                        </div>
+                    `;
+                    isFileUploaded = true;
+                    showToast('Identity document uploaded successfully.');
+
+                    document.getElementById('removeFileBtn').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        fileList.innerHTML = '';
+                        isFileUploaded = false;
+                        showToast('Document removed.', 'warning');
+                    });
+                }, 500);
+            });
+
+            // Finish Form Submit
+            document.getElementById('registerForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                if (!isFileUploaded) {
+                    showToast('Please upload an identity document for verification.', 'warning');
+                    return;
+                }
+
+                const fullName = document.getElementById('regName').value.trim();
+                const email = document.getElementById('regEmail').value.trim();
+                const phone = document.getElementById('regPhone').value.trim();
+                const password = document.getElementById('regPass').value;
+
+                try {
+                    const res = await db.fetch('/auth/register', {
+                        method: 'POST',
+                        body: JSON.stringify({ fullName, email, phone, password })
+                    });
+
+                    if (res.success) {
+                        db.setToken(res.data.token);
+                        db.setUser(res.data.user);
+                        showToast('Welcome to CyberPay AI! Wallet initialized with ₹1,000 credit.', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+                    }
+                } catch (err) {
+                    showToast(err.message, 'danger');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="txns-page-indicator" style="display:none;"></div>
+
+            <div class="glass-card fade-in" style="margin-bottom: 24px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom: 24px;">
+                    <div>
+                        <h2 style="font-size:1.5rem; margin-bottom:4px;">Transaction Statement</h2>
+                        <p class="text-muted" style="font-size:0.875rem;">Verified transaction clearances and security classifications</p>
+                    </div>
+                    
+                    <div style="display:flex; gap:12px;">
+                        <button class="btn btn-secondary" id="exportPdfBtn" style="padding:8px 16px; font-size:0.85rem;"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+                        <button class="btn btn-secondary" id="exportCsvBtn" style="padding:8px 16px; font-size:0.85rem;"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+                    </div>
+                </div>
+
+                <!-- Filters Control Bar -->
+                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:16px; margin-bottom:24px; flex-wrap:wrap;">
+                    <div class="header-search" style="display:flex; max-width:none; background:rgba(30,41,59,0.3);">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search by recipient name, ID, or category..." id="txnSearchInput">
+                    </div>
+                    
+                    <div>
+                        <select class="input-control" id="txnTypeFilter" style="padding: 10px 16px;">
+                            <option value="all">All Types</option>
+                            <option value="debit">Payments Sent</option>
+                            <option value="credit">Payments Received</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <select class="input-control" id="txnRiskFilter" style="padding: 10px 16px;">
+                            <option value="all">All Risk Levels</option>
+                            <option value="safe">Safe</option>
+                            <option value="suspicious">Suspicious Audit</option>
+                            <option value="high-risk">Blocked High-Risk</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Ledger Table -->
+                <div class="table-container">
+                    <table class="txn-table">
+                        <thead>
+                            <tr>
+                                <th>Recipient / Sender</th>
+                                <th>Date & Time</th>
+                                <th>AI Security Classification</th>
+                                <th>Clearance Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fullTxnTableBody">
+                            <!-- Injected dynamically by dashboard.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

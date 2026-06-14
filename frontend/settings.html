@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation Anchor -->
+        <div id="sidebar-container"></div>
+
+        <main class="main-content">
+            <!-- Top Navbar Header Anchor -->
+            <div id="header-container"></div>
+
+            <!-- Page Indicator Router -->
+            <div id="settings-page-indicator" style="display:none;"></div>
+
+            <div class="transfer-container">
+                <div class="glass-card fade-in" style="display:flex; flex-direction:column; gap:32px;">
+                    
+                    <!-- Title -->
+                    <div>
+                        <h2 style="font-size:1.5rem; margin-bottom:4px;">Account Settings</h2>
+                        <p class="text-muted" style="font-size:0.875rem;">Manage security keys, UI settings, and mock databases</p>
+                    </div>
+
+                    <!-- Change PIN Form -->
+                    <div style="border-bottom:1px solid var(--border-color); padding-bottom:30px;">
+                        <h3 style="font-size:1.1rem; margin-bottom:16px;"><i class="fa-solid fa-key" style="margin-right:8px; color:var(--primary);"></i>Update Security PIN</h3>
+                        <form id="changePinForm">
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px;">
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="currentPinVal">Current 4-Digit PIN</label>
+                                    <input type="password" id="currentPinVal" class="input-control" maxlength="4" placeholder="••••" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="newPinVal">New 4-Digit PIN</label>
+                                    <input type="password" id="newPinVal" class="input-control" maxlength="4" placeholder="••••" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="padding:10px 24px;">Update Secure PIN</button>
+                        </form>
+                    </div>
+
+                    <!-- Notification & Language Preferences -->
+                    <div style="border-bottom:1px solid var(--border-color); padding-bottom:30px; display:flex; flex-direction:column; gap:16px;">
+                        <h3 style="font-size:1.1rem;"><i class="fa-solid fa-gears" style="margin-right:8px; color:var(--primary);"></i>UI Preferences</h3>
+                        <div class="switch-group" style="padding-top:0;">
+                            <div class="switch-details">
+                                <span class="switch-title">Email Notifications</span>
+                                <span class="switch-desc">Receive security alerts and weekly spending reports.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked id="notifyToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="switch-group">
+                            <div class="switch-details">
+                                <span class="switch-title">Weekly AI Audit Digest</span>
+                                <span class="switch-desc">Monthly summaries compiled by AI spending analysts.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked id="digestToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sandbox resets -->
+                    <div>
+                        <h3 style="font-size:1.1rem; color:var(--danger); margin-bottom:12px;"><i class="fa-solid fa-triangle-exclamation" style="margin-right:8px;"></i>Developer Sandbox Tools</h3>
+                        <p class="text-muted" style="font-size:0.85rem; margin-bottom:16px;">Reset local databases to default values to clear transfers and reload starting states.</p>
+                        
+                        <button class="btn btn-danger" id="resetMockDataBtn" style="padding:10px 20px;">
+                            Reset Local Mock Data <i class="fa-solid fa-trash-arrow-up"></i>
+                        </button>
+                    </div>
+
+                    <div style="text-align:center; border-top:1px solid var(--border-color); padding-top:20px; font-size:0.8rem; color:var(--text-muted);">
+                        <span>App Version: 2.1.0-AI-Shield-Beta</span>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const notToggle = document.getElementById('notifyToggle');
+            const digToggle = document.getElementById('digestToggle');
+            
+            if (notToggle) notToggle.addEventListener('change', () => {
+                showToast(notToggle.checked ? 'Email notifications enabled.' : 'Email notifications silenced.', 'info');
+            });
+
+            if (digToggle) digToggle.addEventListener('change', () => {
+                showToast(digToggle.checked ? 'AI digest reports enabled.' : 'AI digest reports silenced.', 'info');
+            });
+        });
+    </script>
+</body>
+</html>

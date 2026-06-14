@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CyberPay AI</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Poppins -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <!-- Layout Wrapper -->
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar Navigation Anchor (Injected by ui.js) -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Workspace Contents -->
+        <main class="main-content">
+            
+            <!-- Top Navbar Header Anchor (Injected by ui.js) -->
+            <div id="header-container"></div>
+
+            <!-- Page Identifier for dashboard.js router -->
+            <div id="dashboard-page-indicator" style="display:none;"></div>
+
+            <!-- Dashboard Contents Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Wallet Balance Card -->
+                <div class="glass-card stat-card" style="background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(30,64,175,0.05) 100%), var(--card-bg);">
+                    <div class="stat-header">
+                        <span class="stat-title">Wallet Balance</span>
+                        <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+                    </div>
+                    <div>
+                        <div class="stat-value">
+                            <span id="walletBalanceVal">₹0.00</span>
+                            <i class="fa-solid fa-eye-slash toggle-balance" id="toggleBalanceBtn" title="Hide Balance"></i>
+                        </div>
+                        <div class="stat-trend trend-up">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <span>+12.4% this month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Sent Card -->
+                <div class="glass-card stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Payments Sent</span>
+                        <div class="stat-icon sent"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="walletSentVal">₹0.00</div>
+                        <div class="stat-trend trend-up">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <span>+4.8% spending rate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Received Card -->
+                <div class="glass-card stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Funds Received</span>
+                        <div class="stat-icon received"><i class="fa-solid fa-arrow-down-left-from-square"></i></div>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="walletReceivedVal">₹0.00</div>
+                        <div class="stat-trend trend-up">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <span>+18.2% credit rate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Shield Status Card -->
+                <div class="glass-card stat-card" style="border-color: rgba(16, 185, 129, 0.4);">
+                    <div class="stat-header">
+                        <span class="stat-title">AI Fraud Alerts</span>
+                        <div class="stat-icon alert"><i class="fa-solid fa-shield-virus"></i></div>
+                    </div>
+                    <div>
+                        <div class="stat-value text-warning" id="fraudAlertsVal">0</div>
+                        <div class="stat-trend">
+                            <i class="fa-solid fa-shield-halved text-success"></i>
+                            <span class="text-success">Shield Active (98% Score)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Dashboard Panel -->
+                <div class="glass-card quick-actions-panel">
+                    <h3 style="font-size:1.1rem; margin-bottom: 4px;">Quick Financial Actions</h3>
+                    <p class="text-muted" style="font-size:0.8rem;">Select an action below to transact or verify settings</p>
+                    <div class="quick-actions-list">
+                        <div class="action-btn" onclick="window.location.href='send-money.html'">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Money</span>
+                        </div>
+                        <div class="action-btn" onclick="window.location.href='receive-money.html'">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <span>Receive Pay</span>
+                        </div>
+                        <div class="action-btn" onclick="window.location.href='bills.html'">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                            <span>Pay Utilities</span>
+                        </div>
+                        <div class="action-btn" onclick="window.location.href='transactions.html'">
+                            <i class="fa-solid fa-receipt"></i>
+                            <span>Ledger</span>
+                        </div>
+                        <div class="action-btn" onclick="window.location.href='insights.html'">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>AI Insights</span>
+                        </div>
+                        <div class="action-btn" onclick="window.location.href='fraud.html'">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Fraud Shield</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spending Analytics Section -->
+                <div class="charts-grid" style="grid-column: span 4; margin-bottom:0;">
+                    
+                    <!-- Line Chart Canvas -->
+                    <div class="glass-card">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                            <div>
+                                <h3 style="font-size:1.1rem;">Weekly Cash Flow</h3>
+                                <p class="text-muted" style="font-size:0.8rem;">Income vs Expense Activity</p>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="weeklyActivityChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Doughnut Chart Canvas -->
+                    <div class="glass-card">
+                        <div style="margin-bottom:20px;">
+                            <h3 style="font-size:1.1rem;">Category Breakdown</h3>
+                            <p class="text-muted" style="font-size:0.8rem;">Spending by department</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="spendCategoriesChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Recent Transactions table -->
+                <div class="glass-card recent-transactions" style="grid-column: span 4;">
+                    <div class="table-header-flex">
+                        <div>
+                            <h3 style="font-size:1.1rem;">Recent Transactions Ledger</h3>
+                            <p class="text-muted" style="font-size:0.8rem;">Sub-second clearances via AI Guard</p>
+                        </div>
+                        <a href="transactions.html" class="btn btn-secondary" style="padding:6px 16px; font-size:0.85rem;">View Full Ledger <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="table-container">
+                        <table class="txn-table">
+                            <thead>
+                                <tr>
+                                    <th>Recipient / Sender</th>
+                                    <th>Date</th>
+                                    <th>Security Grade</th>
+                                    <th>Cleared Status</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentTxnTableBody">
+                                <!-- Dynamic entries -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- System Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
