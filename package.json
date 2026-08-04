@@ -1,0 +1,20 @@
+{
+  "name": "ai-enhanced-digital-payment",
+  "version": "1.0.0",
+  "description": "AI-Enhanced Digital Payment Ecosystem with Real-Time Neural Fraud Detection and Intelligent Spend Insights",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev:backend": "nodemon backend/server.js",
+    "dev:ml": "cd ml-service && python app.py",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fintech",
+    "ai",
+    "fraud-detection",
+    "digital-payments"
+  ],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,53 @@
+<!-- Component: Navbar (Header) -->
+<header class="header">
+    <div class="mobile-nav-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="header-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search transactions, bills..." id="globalSearch">
+    </div>
+    <div class="header-actions">
+        <!-- Theme Toggle Btn -->
+        <button class="icon-badge-btn" id="themeToggleBtn" title="Toggle theme">
+            <i class="fa-solid fa-sun-plant-wilt"></i>
+        </button>
+        <!-- Notification Trigger -->
+        <div style="position: relative;">
+            <button class="icon-badge-btn" id="notifyBell">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge-dot" id="bellDot"></span>
+            </button>
+            <div class="dropdown-menu" id="notifyDropdown" style="width: 320px; padding: 12px;">
+                <h4 style="margin-bottom:12px; font-size:0.95rem; border-bottom:1px solid var(--border-color); padding-bottom:8px;">AI Shield Notifications</h4>
+                <div id="notifyList" style="display:flex; flex-direction:column; gap:10px; max-height:240px; overflow-y:auto;">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+            </div>
+        </div>
+        <!-- User Profile Dropdown -->
+        <div class="profile-menu" id="profileDropdownTrigger">
+            <div class="profile-avatar">U</div>
+            <div class="profile-details">
+                <span class="profile-name">User Name</span>
+                <span class="profile-role">user@cyberpay.ai</span>
+            </div>
+            <i class="fa-solid fa-chevron-down" style="font-size:0.8rem; color:var(--text-muted);"></i>
+            
+            <div class="dropdown-menu" id="profileDropdown">
+                <div class="dropdown-item" onclick="window.location.href='profile.html'">
+                    <i class="fa-solid fa-circle-user"></i> My Profile
+                </div>
+                <div class="dropdown-item" onclick="window.location.href='settings.html'">
+                    <i class="fa-solid fa-gears"></i> Account Settings
+                </div>
+                <div class="dropdown-item" onclick="window.location.href='fraud.html'">
+                    <i class="fa-solid fa-shield-virus"></i> Security Shield
+                </div>
+                <div class="dropdown-item" id="dropdownLogout" style="color:var(--danger); border-top:1px solid var(--border-color); border-radius:0;">
+                    <i class="fa-solid fa-power-off"></i> Sign Out
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
