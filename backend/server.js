@@ -8,6 +8,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 
 const env = require('./config/env');
 const { connectDB, sequelize } = require('./config/database');
@@ -31,18 +32,24 @@ const app = express();
 // ==========================================
 
 // Security Headers
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false // Allows loading local scripts/resources for development
+}));
 
 // Cross Origin Resource Sharing Configuration
 app.use(cors({
-    origin: '*', // Allow all client domains for mockup preview compatibility
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: env.clientUrl === '*' ? '*' : [env.clientUrl, 'http://localhost:5000', 'http://127.0.0.1:5000', 'http://localhost:3000', 'http://localhost:5500'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Body Parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // HTTP Request Logging
 if (env.nodeEnv === 'development') {
@@ -79,6 +86,16 @@ app.use('/api/auth/register', authLimiter);
 // ==========================================
 // ROUTES MAPPING
 // ==========================================
+
+// Public Environment Configuration API
+app.get('/api/config', (req, res) => {
+    res.status(200).json({
+        success: true,
+        env: env.nodeEnv,
+        port: env.port,
+        apiBaseUrl: `http://localhost:${env.port}/api`
+    });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);

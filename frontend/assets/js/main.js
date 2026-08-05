@@ -2,13 +2,9 @@
  * CyberPay AI - Main JS (Client-Server Integration Edition)
  * Central API Client, Fetch Wrapper, Token Storage, and Authentication Guards
  */
-// Central API Client URL.
-// Set DEPLOYED_BACKEND_URL to your deployed backend domain (e.g. 'https://your-backend-app.onrender.com') when deploying.
-// If empty, it will automatically fallback to localhost:5000 in development, or the current host in production.
-const DEPLOYED_BACKEND_URL = ''; 
-
-const API_URL = DEPLOYED_BACKEND_URL 
-    ? `${DEPLOYED_BACKEND_URL.replace(/\/$/, '')}/api`
+// Central API Client URL resolved from .env / config.js
+const API_URL = (window.ENV && window.ENV.API_BASE_URL)
+    ? window.ENV.API_BASE_URL
     : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:'
         ? 'http://localhost:5000/api'
         : `${window.location.protocol}//${window.location.host}/api`);

@@ -19,3 +19,32 @@
 [2026-06-13 14:09:23,934] INFO [app.startup_event:81] - Successfully loaded and cached ML model artifacts on startup.
 [2026-06-13 14:10:09,477] INFO [predict.predict_transaction:109] - Transaction inference result - Prediction: 0, Score: 0, Level: SAFE
 [2026-06-13 14:11:24,945] INFO [predict.predict_transaction:109] - Transaction inference result - Prediction: 0, Score: 0, Level: SAFE
+[2026-08-05 22:05:16,731] INFO [predict.load_model:40] - Deserializing and caching model and scaler artifacts...
+[2026-08-05 22:06:54,297] WARNING [predict.preprocess_data:56] - Feature 'V2' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,297] WARNING [predict.preprocess_data:56] - Feature 'V3' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,297] WARNING [predict.preprocess_data:56] - Feature 'V4' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V5' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V6' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V7' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V8' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V9' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V10' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V11' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V12' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V13' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V14' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V15' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,298] WARNING [predict.preprocess_data:56] - Feature 'V16' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V17' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V18' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V19' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V20' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V21' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V22' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V23' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V24' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V25' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V26' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V27' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,299] WARNING [predict.preprocess_data:56] - Feature 'V28' was omitted in transaction payload. Imputing with 0.0.
+[2026-08-05 22:06:54,557] INFO [predict.predict_transaction:109] - Transaction inference result - Prediction: 0, Score: 0, Level: SAFE
